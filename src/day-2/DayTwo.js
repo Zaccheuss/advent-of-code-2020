@@ -1,4 +1,4 @@
-module.exports = { checkSchema, minLetters, maxLetters, getCriticalLetter, checkPassword };
+module.exports = { dayTwo, checkSchema, minLetters, maxLetters, getCriticalLetter, checkPassword };
 
 function dayTwo(schema) {
   return schema.filter(scheme => {

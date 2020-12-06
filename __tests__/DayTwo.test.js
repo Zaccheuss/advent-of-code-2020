@@ -1,4 +1,5 @@
-const { dayTwo, minLetters, maxLetters, getCriticalLetter, checkPassword } = require('../src/day-2/dayTwo');
+const { dayTwo, minLetters, maxLetters, getCriticalLetter, checkPassword } = require('../src/day-2/DayTwo');
+const { dayTwoPartTwo } = require('../src/day-2/DayTwoPartTwo');
 
 describe("Day Two Tests", () => {
   test("minimum password letters is correct", () => {
@@ -20,8 +21,16 @@ describe("Day Two Tests", () => {
   });
 
   test("can check if password is valid or not", () => {
-    expect(dayTwo('1-3 a: abcde')).toEqual(true);
-    expect(dayTwo('1-3 b: cdefg')).toEqual(false);
-    expect(dayTwo('2-9 c: ccccccccc')).toEqual(true);
+    expect(dayTwo(['1-3 a: abcde'])).toEqual(1);
+    expect(dayTwo(['1-3 b: cdefg'])).toEqual(0);
+    expect(dayTwo(['2-9 c: ccccccccc'])).toEqual(1);
   });
+
+  test("day two part two tests", () => {
+    expect(dayTwoPartTwo(['1-3 a: abcde'])).toEqual(1);
+    expect(dayTwoPartTwo(['1-3 b: cdefg'])).toEqual(0);
+    expect(dayTwoPartTwo(['2-9 c: ccccccccc'])).toEqual(0);
+    expect(dayTwoPartTwo(['2-9 c: ccccccccc', '1-3 b: cdefg', '1-3 a: abcde'])).toEqual(1);
+  });
+
 });
