@@ -1,4 +1,4 @@
-const dayOne = require('../day-1/DayOne');
+const dayOne = require('../src/day-1/DayOne');
 
 describe("Day One Tests", () => {
   test("Two entries equal 40000", () => {
