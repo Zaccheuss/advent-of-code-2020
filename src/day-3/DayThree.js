@@ -5,30 +5,27 @@ function textFileToArray() {
     var lines = require('fs').readFileSync(filename, 'utf-8')
         .split('\n')
 
-    var myArray = lines.map(line => {
+    var treeArray = lines.map(line => {
         return line.split('');
     });
 
-    let rightPosition = 3;
-    let treeCount = 0;
-    for (let i = 1; i < myArray.length; i++) { // start at the second row
-
-        // console.log(myArray[i][test]);
-
-        // if (myArray[i][test] === '.') {
-        //     console.log('O');
-        // } else if (myArray[i][test] === '#') {
-        //     console.log('X');
-        //     treeCount++;
-        // }
-
-        if (myArray[i][rightPosition] === '#') {
-            treeCount++;
-        }
-
-        rightPosition += 3;
-    }
-    console.log(treeCount);
+    console.log(countHitTrees(treeArray, 1, 1));
+    console.log(countHitTrees(treeArray, 3, 1));
+    console.log(countHitTrees(treeArray, 5, 1));
+    console.log(countHitTrees(treeArray, 7, 1));
+    console.log(countHitTrees(treeArray, 1, 2));
 };
+
+function countHitTrees(treeArray, rightDiff, downDiff) {
+    let treesHit = 0;
+    let rightPosition = rightDiff;
+    for (let i = downDiff; i < treeArray.length; i += downDiff) { // start at the second row
+        if (treeArray[i][rightPosition] === '#') {
+            treesHit++;
+        }
+        rightPosition += rightDiff;
+    }
+    return treesHit;
+}
 
 textFileToArray();
