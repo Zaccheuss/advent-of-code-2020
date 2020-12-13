@@ -14,6 +14,7 @@ function textFileToArray() {
     console.log(countHitTrees(treeArray, 5, 1));
     console.log(countHitTrees(treeArray, 7, 1));
     console.log(countHitTrees(treeArray, 1, 2));
+    //multiply these all together to get: 3510149120
 };
 
 function countHitTrees(treeArray, rightDiff, downDiff) {
