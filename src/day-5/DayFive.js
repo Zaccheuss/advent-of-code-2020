@@ -2,6 +2,8 @@ function run() {
     const inputArry = parseTextInputToArray();
 
     let maxSeatId = 0;
+    let minSeatId = 99999999;
+    let allSeats = [];
 
     inputArry.forEach((ticket) => {
         let rowArray = ticket.substring(0, 7).split('');
@@ -11,9 +13,21 @@ function run() {
         if (seatId > maxSeatId) {
             maxSeatId = seatId;
         }
+        if (seatId < minSeatId) {
+            minSeatId = seatId;
+        }
+        
+        allSeats.push(seatId);
         console.log(maxSeatId);
     });
 
+    // Create array from minSeatId to maxSeatId to compare with allSeats
+    let allNumbers = [...Array(maxSeatId + 1).keys()].slice(minSeatId);
+
+    // https://stackoverflow.com/questions/40537972/compare-2-arrays-and-show-unmatched-elements-from-array-1
+    // compare both arrays to find the seat that is in allNumbers but not in allSeats
+    let leftoverNumber = allNumbers.filter(function(n){return !this.has(n)}, new Set(allSeats));
+    console.log(leftoverNumber);
 }
 
 function findRow(input) {
