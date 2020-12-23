@@ -3,7 +3,7 @@ const SPECIAL_COLOR = 'shiny gold'
 const luggageArray = createArrayFromInput();
 
 function createArrayFromInput() {
-  const filename = 'E:/Zac/workspace/advent-of-code-2020/src/day-7/input.txt';
+  const filename = 'src/day-7/input.txt';
   const splitInput = require('fs').readFileSync(filename, 'utf-8').split('\r\n');
 
   output = [];
@@ -24,98 +24,26 @@ function createArrayFromInput() {
           color: bag.substring(2)
         })
       });
-      console.log(luggage);
     output.push(luggage);
   });
 
   return output;
 }
 
-function getBagColorsThatContainGold() {
-  const colorSet = new Set();
+function getBagColorsThatContainGold(inputSet) {
+  const outputSet = new Set();
+  inputSet.forEach(x => outputSet.add(x));
   luggageArray.forEach((luggage) => {
-    if (luggage.contains.some(bag => bag.color === SPECIAL_COLOR)) {
-      colorSet.add(luggage.color);
+    if (luggage.contains.some(bag => outputSet.has(bag.color))) {
+      outputSet.add(luggage.color);
     }
   });
-  return colorSet;
+
+  if (outputSet.size === inputSet.size) {
+    return outputSet.size - 1; //Subtract 1 because the special color shouldn't actually be included in the set
+  } else {
+    return getBagColorsThatContainGold(outputSet);
+  }
 }
 
-function getBagColorsThatContainBagsThatContainGold() {
-  const colorSet = getBagColorsThatContainGold();
-  luggageArray.forEach((luggage) => {
-    if (luggage.contains.some(bag => colorSet.has(bag.color))) {
-      colorSet.add(luggage.color);
-    }
-  });
-  return colorSet;
-}
-
-function getBagColorsThatContainBagsThatContainGold2() {
-  const colorSet = getBagColorsThatContainBagsThatContainGold();
-  luggageArray.forEach((luggage) => {
-    if (luggage.contains.some(bag => colorSet.has(bag.color))) {
-      colorSet.add(luggage.color);
-    }
-  });
-  return colorSet;
-}
-
-function getBagColorsThatContainBagsThatContainGold3() {
-  const colorSet = getBagColorsThatContainBagsThatContainGold2();
-  luggageArray.forEach((luggage) => {
-    if (luggage.contains.some(bag => colorSet.has(bag.color))) {
-      colorSet.add(luggage.color);
-    }
-  });
-  return colorSet;
-}
-
-function getBagColorsThatContainBagsThatContainGold4() {
-  const colorSet = getBagColorsThatContainBagsThatContainGold3();
-  luggageArray.forEach((luggage) => {
-    if (luggage.contains.some(bag => colorSet.has(bag.color))) {
-      colorSet.add(luggage.color);
-    }
-  });
-  return colorSet;
-}
-
-function getBagColorsThatContainBagsThatContainGold5() {
-  const colorSet = getBagColorsThatContainBagsThatContainGold4();
-  luggageArray.forEach((luggage) => {
-    if (luggage.contains.some(bag => colorSet.has(bag.color))) {
-      colorSet.add(luggage.color);
-    }
-  });
-  return colorSet;
-}
-
-function getBagColorsThatContainBagsThatContainGold6() {
-  const colorSet = getBagColorsThatContainBagsThatContainGold5();
-  luggageArray.forEach((luggage) => {
-    if (luggage.contains.some(bag => colorSet.has(bag.color))) {
-      colorSet.add(luggage.color);
-    }
-  });
-  return colorSet;
-}
-
-function getBagColorsThatContainBagsThatContainGold7() {
-  const colorSet = getBagColorsThatContainBagsThatContainGold6();
-  luggageArray.forEach((luggage) => {
-    if (luggage.contains.some(bag => colorSet.has(bag.color))) {
-      colorSet.add(luggage.color);
-    }
-  });
-  return colorSet;
-}
-
-console.log(getBagColorsThatContainGold());
-console.log(getBagColorsThatContainBagsThatContainGold());
-console.log(getBagColorsThatContainBagsThatContainGold2());
-console.log(getBagColorsThatContainBagsThatContainGold3());
-console.log(getBagColorsThatContainBagsThatContainGold4());
-console.log(getBagColorsThatContainBagsThatContainGold5());
-console.log(getBagColorsThatContainBagsThatContainGold6());
-console.log(getBagColorsThatContainBagsThatContainGold7().size);
+console.log(getBagColorsThatContainGold(new Set().add(SPECIAL_COLOR)));
